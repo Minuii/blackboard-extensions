@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blackboard Assistant</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo">B</span>
+      <div>
+        <strong>Blackboard Assistant</strong>
+        <div id="status" class="muted">Not synced yet</div>
+      </div>
+    </div>
+    <button id="syncBtn" class="primary small" title="Fetch the latest data from Blackboard">Sync</button>
+  </header>
+
+  <nav>
+    <button data-tab="chat" class="active">Chat</button>
+    <button data-tab="overview">Overview</button>
+    <button data-tab="settings">Settings</button>
+  </nav>
+
+  <main>
+    <!-- CHAT -->
+    <section id="tab-chat" class="tab active">
+      <div id="messages"></div>
+      <div id="chips">
+        <button class="chip">What's due soon?</button>
+        <button class="chip">Show my latest announcements</button>
+        <button class="chip">What did I miss this week?</button>
+        <button class="chip">Which homework is still open?</button>
+      </div>
+      <form id="chatForm">
+        <textarea id="input" rows="2" placeholder="Ask about your courses, deadlines, chapters…"></textarea>
+        <div class="row">
+          <button type="button" id="clearChat" class="ghost small">Clear</button>
+          <button type="button" id="stopBtn" class="ghost small" hidden>Stop</button>
+          <button type="submit" id="sendBtn" class="primary">Send</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section id="tab-overview" class="tab">
+      <div id="overview"><p class="muted">Sync to see your data.</p></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="tab-settings" class="tab">
+      <h3>1 · Blackboard</h3>
+      <label>Blackboard address</label>
+      <div class="row">
+        <input id="origin" type="text" placeholder="https://your-university.blackboard.com">
+        <button id="useTab" class="ghost small" type="button" title="Use the page open in the current tab">Use tab</button>
+      </div>
+      <p class="hint">Log in to Blackboard normally in this browser. The extension reuses that session. It never sees your password.</p>
+
+      <h3>2 · AI</h3>
+      <p id="aiState" class="hint" role="status"></p>
+      <label for="apiKey">DeepSeek API key (optional)</label>
+      <p class="hint">Leave empty to use the browser's built-in AI, which runs on your computer and sends nothing out. A key gives longer, smarter answers and works in every browser.</p>
+      <div class="row">
+        <input id="apiKey" type="password" placeholder="sk-…" autocomplete="off">
+        <button id="showKey" class="ghost small" type="button">Show</button>
+      </div>
+      <label for="model">DeepSeek model (only used with a key)</label>
+      <select id="model">
+        <option value="deepseek-chat">deepseek-chat (fast)</option>
+        <option value="deepseek-reasoner">deepseek-reasoner (slower, deeper)</option>
+      </select>
+
+      <h3>3 · Automatic updates</h3>
+      <label>Check for new announcements</label>
+      <select id="syncMinutes">
+        <option value="0">Never (manual sync only)</option>
+        <option value="30">Every 30 minutes</option>
+        <option value="60">Every hour</option>
+        <option value="180">Every 3 hours</option>
+      </select>
+      <label class="check"><input id="notify" type="checkbox" checked> Desktop notification for new announcements</label>
+
+      <div class="row space">
+        <button id="saveBtn" class="primary">Save &amp; allow access</button>
+        <span id="saveMsg" class="muted"></span>
+      </div>
+
+      <h3>Courses to include</h3>
+      <div id="courseTools" hidden>
+        <input id="courseSearch" type="text" placeholder="Search courses or terms" aria-label="Search courses or terms">
+        <p class="hint">Quick select (ticks those courses, unticks the rest):</p>
+        <div id="coursePresets" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px"></div>
+      </div>
+      <div id="courseList"><p class="muted">Press Sync once to list your courses.</p></div>
+      <button id="applyCourses" class="ghost small" hidden>Apply selection &amp; re-sync</button>
+
+      <h3>Diagnostics</h3>
+      <div id="diag" class="muted">Nothing yet.</div>
+
+      <h3>Data</h3>
+      <button id="wipe" class="ghost small danger">Delete all stored data &amp; settings</button>
+
+      <p class="hint">Credits: <a href="https://github.com/Minuii" target="_blank" rel="noopener noreferrer" style="color:#2f6fed;text-decoration:underline">Minuii</a></p>
+    </section>
+  </main>
+
+  <script type="module" src="sidepanel.js"></script>
+</body>
+</html>

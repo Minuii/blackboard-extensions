@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Blackboard Assistant",
+  "version": "1.1.0",
+  "description": "Reads your Blackboard courses, announcements, content and deadlines, and lets you chat about them. No API key needed in Chrome (built-in AI); DeepSeek key optional.",
+  "permissions": ["storage", "unlimitedStorage", "alarms", "notifications", "tabs"],
+  "host_permissions": ["https://api.deepseek.com/*"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_title": "Blackboard Assistant" },
+  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+}

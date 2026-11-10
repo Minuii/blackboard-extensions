@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Blackboard Bulk Downloader",
+  "version": "1.1.0",
+  "description": "Find every file on a Blackboard course page (and its subfolders), pick the ones you want, download them in one click.",
+  "minimum_chrome_version": "102",
+  "permissions": ["activeTab", "scripting", "downloads", "storage"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
+  },
+  "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
+}
